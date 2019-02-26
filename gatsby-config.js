@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Tailwind`,
-    description: `Gatsby starter styled with Tailwind`,
-    author: `@taylorbryant`,
+    title: `Jtcruthers Portfolio`,
+    description: `A place to doodle`,
+    author: `@jtcruthers`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

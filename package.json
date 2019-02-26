@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-tailwind",
-  "description": "Gatsby starter styled with Tailwind",
-  "version": "2.1.0",
-  "author": "Taylor Bryant <taylor@bryant.io>",
+  "name": "jtcruthers.github.io",
+  "description": "Homepage for me",
+  "version": "1.0",
+  "author": "Justin Carruthers <jtcruthers@gmail.com>",
   "dependencies": {
     "gatsby": "^2.1.4",
     "gatsby-plugin-manifest": "^2.0.17",
@@ -30,14 +30,12 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "prettier": "^1.16.4",
     "tailwindcss": "^0.7.4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/taylorbryant/gatsby-starter-tailwind"
-  },
-  "bugs": {
-    "url": "https://github.com/taylorbryant/gatsby-starter-tailwind/issues"
+    "url": "git@github.com:Jtcruthers/jtcruthers.github.io"
   }
 }
