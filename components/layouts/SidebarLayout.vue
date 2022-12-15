@@ -21,7 +21,7 @@
                   <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
-                  <span v-for="item in navigation" :key="item.name" :class="[item.current ? 'bg-red-700 text-red-50' : 'text-gray-100 hover:bg-red-400 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                  <span v-for="item in navigation" :key="item.name" :class="[item.current ? 'bg-red-500 text-teal-200' : 'text-gray-100 hover:bg-red-400 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                     <NuxtLink :to="item.to" @click="sidebarOpen = false">{{ item.name }}</NuxtLink>
                   </span>
                 </nav>
@@ -36,17 +36,19 @@
     </TransitionRoot>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-52 md:flex-col">
+    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 lg:w-60 md:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex min-h-0 flex-1 flex-col bg-red-400">
+      <div class="flex min-h-0 flex-1 flex-col bg-red-400 border-r-4 border-teal-300">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
-            <span v-for="item in navigation" :key="item.name" :class="[item.current ? 'bg-red-600 text-red-50' : 'text-gray-100 hover:bg-red-500 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
-              <NuxtLink :to="item.to">{{ item.name }}</NuxtLink>
-            </span>
+            <NuxtLink v-for="item in navigation" :key="item.name" :to="item.to">
+              <span :class="[item.current ? 'bg-red-600 text-red-50' : 'text-gray-100 hover:bg-red-500 hover:text-white', 'mt-1.5 group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+                {{ item.name }}
+              </span>
+            </NuxtLink>
           </nav>
         </div>
       </div>
@@ -54,7 +56,7 @@
     <div class="flex flex-1 flex-col md:pl-64 h-full">
       <div class="sticky top-0 z-10 bg-red-400 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
         <button type="button" class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="sidebarOpen = true">
-          <Bars3Icon class="h-6 w-6 text-red-800" aria-hidden="true" />
+          <Bars3Icon class="h-6 w-6 text-teal-300" aria-hidden="true" />
         </button>
       </div>
       <main class="flex-1">
