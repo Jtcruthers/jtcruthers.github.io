@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import SidebarLayout from './components/layouts/SidebarLayout.vue';
+</script>
+
 <template>
-  <div class="h-full w-full text-yellow-300 bg-red-700">
+  <SidebarLayout>
     <NuxtPage />
-  </div>
+  </SidebarLayout>
 </template>
 
 <style>

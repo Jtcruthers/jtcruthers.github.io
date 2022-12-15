@@ -10,16 +10,18 @@ const name = computed(() => {
 
 setInterval(() => {
   counter.value++
-}, 3500)
-
+}, 2000)
 </script>
 
 <template>
-  <div class="w-full h-full">
-    <!-- Add transition to text change -->
+  <div class="flex justify-center items-center align-middle h-full w-full">
+      <div class="w-1/2 lg:w-5/12 xl:w-1/3 px-16 py-12 border-4 border-solid border-gray-100 rounded-lg sm:text-4xl lg:text-5xl text-center">
     <Transition name="fade" mode="out-in">
-      <h1 :key="counter" class="w-full h-full flex align-middle justify-center text-4xl m-auto text-center">{{ `Hello, ${name} :)` }}</h1>
+      <h1 :key="name" class="h-full w-full sm:text-4xl lg:text-5xl text-center">
+        Hello {{ name }} :)
+      </h1>
     </Transition>
+      </div>
   </div>
 </template>
 
@@ -35,10 +37,5 @@ setInterval(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-h1 {
-  height: 100vh;
-  line-height: 100vh;
 }
 </style>
