@@ -8,7 +8,10 @@
       </div>
     </div>
 
-    <Divider class="mt-8" />
+    <Divider class="mt-8 mb-8" />
 
+    <div class="pt-10 mx-1.5">
+      <AsheFeed />
+    </div>
   </div>
 </template>
