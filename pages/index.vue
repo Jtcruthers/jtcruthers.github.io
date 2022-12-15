@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { ChevronDownIcon } from "@heroicons/vue/20/solid"
+import { ChevronDownIcon } from "@heroicons/vue/20/solid/index.js"
 const names = ["Justin", "Molly", "Ashe"]
 let counter = ref(0)
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AcademicCapIcon, BookOpenIcon } from '@heroicons/vue/20/solid'
+import { AcademicCapIcon, BookOpenIcon } from '@heroicons/vue/20/solid/index.js'
 
 const timeline = [
   {

@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { Bars3Icon } from '@heroicons/vue/20/solid'
+import { Bars3Icon } from '@heroicons/vue/20/solid/index.js'
 
 const route = useRoute()
 
