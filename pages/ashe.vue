@@ -16,9 +16,6 @@
 
     <Divider class="mb-12 -mt-5" />
 
-    <div class="flex flex-row justify-between mx-3 sm:mx-6 lg:mx-10">
-     <img src="/images/molly_and_ashe_little.jpeg" alt="Molly and Ashe" class="inline-block h-48 w-36 sm:h-64 sm:w-48 md:h-72 md:w-56 lg:h-96 lg:w-72 rounded-lg border-teal-200 border-solid border-2" />
-     <img src="/images/me_and_ashe.jpeg" alt="Me and Ashe" class="block h-48 w-36 sm:h-64 sm:w-48 md:h-72 md:w-56 lg:h-96 lg:w-72 rounded-lg border-teal-200 border-solid border-2" />
-    </div>
+    <AshePhotos />
   </div>
 </template>
