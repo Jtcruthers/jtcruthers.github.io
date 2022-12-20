@@ -18,7 +18,7 @@
               </TransitionChild>
               <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
                 <div class="flex flex-shrink-0 items-center px-4">
-                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+                  <span class="text-5xl text-teal-300 font-bold">{{ logoName }}</span>
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
                   <span v-for="item in navigation" :key="item.name" :class="[item.current ? 'bg-red-500 text-teal-200' : 'text-gray-100 hover:bg-red-400 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
@@ -41,7 +41,7 @@
       <div class="flex min-h-0 flex-1 flex-col bg-red-400 border-r-4 border-teal-300">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+            <span class="text-6xl text-teal-300 font-bold">{{ logoName }}</span>
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
             <NuxtLink v-for="item in navigation" :key="item.name" :to="item.to">
@@ -74,11 +74,11 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Bars3Icon } from '@heroicons/vue/20/solid/index.js'
 
 const route = useRoute()
-
 const navigation = computed(() => [
   { name: 'Home', to: '/', current: route.path === '/'},
   { name: 'Ashe', to: '/ashe', current: route.path === '/ashe' },
 ])
 
 const sidebarOpen = ref(false)
+const logoName = 'JC'
 </script>
