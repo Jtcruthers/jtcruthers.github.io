@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     base: '/jtcruthers.github.io/'
   },
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/image-edge'
   ]
 })
