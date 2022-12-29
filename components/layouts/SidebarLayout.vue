@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/20/solid/index.js'
+
+const route = useRoute()
+const navigation = computed(() => [
+  { name: 'Home', to: '/', current: route.path === '/'},
+  { name: 'Ashe', to: '/ashe', current: route.path === '/ashe' },
+])
+
+const sidebarOpen = ref(false)
+const logoName = 'JC'
+</script>
+
 <template>
   <div class="text-white bg-red-500 h-full w-full">
     <TransitionRoot as="template" :show="sidebarOpen">
@@ -11,8 +26,8 @@
             <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-red-400">
               <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="absolute top-0 right-0 -mr-12 pt-2">
-                  <button type="button" class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" @click="sidebarOpen = false">
-                    <span class="sr-only">Close sidebar</span>
+                  <button type="button" class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none" @click="sidebarOpen = false">
+                    <XMarkIcon class="h-6 w-6 text-teal-300" aria-hidden="true" />
                   </button>
                 </div>
               </TransitionChild>
@@ -21,9 +36,11 @@
                   <span class="text-5xl text-teal-300 font-bold">{{ logoName }}</span>
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
-                  <span v-for="item in navigation" :key="item.name" :class="[item.current ? 'bg-red-500 text-teal-200' : 'text-gray-100 hover:bg-red-400 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
-                    <NuxtLink :to="item.to" @click="sidebarOpen = false">{{ item.name }}</NuxtLink>
-                  </span>
+                  <NuxtLink v-for="item in navigation" :key="item.name" :to="item.to" @click="sidebarOpen = false">
+                    <span :class="[item.current ? 'bg-red-500 text-teal-200' : 'text-gray-100 hover:bg-red-500 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                      {{ item.name }}
+                    </span>
+                  </NuxtLink>
                 </nav>
               </div>
             </DialogPanel>
@@ -55,7 +72,7 @@
     </div>
     <div class="flex flex-1 flex-col md:pl-64 h-full">
       <div class="sticky top-0 z-10 bg-red-400 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
-        <button type="button" class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="sidebarOpen = true">
+        <button type="button" class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-300" @click="sidebarOpen = true">
           <Bars3Icon class="h-6 w-6 text-teal-300" aria-hidden="true" />
         </button>
       </div>
@@ -67,18 +84,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { Bars3Icon } from '@heroicons/vue/20/solid/index.js'
-
-const route = useRoute()
-const navigation = computed(() => [
-  { name: 'Home', to: '/', current: route.path === '/'},
-  { name: 'Ashe', to: '/ashe', current: route.path === '/ashe' },
-])
-
-const sidebarOpen = ref(false)
-const logoName = 'JC'
-</script>
