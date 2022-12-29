@@ -1,7 +1,17 @@
 <script setup lang="ts">
-import { AcademicCapIcon, BookOpenIcon } from '@heroicons/vue/20/solid/index.js'
+import { AcademicCapIcon, BookOpenIcon, HomeIcon } from '@heroicons/vue/20/solid/index.js'
 
 const timeline = [
+  {
+    id: 1,
+    content: 'Adopted',
+    target: 'and brought home',
+    href: '#',
+    date: 'Oct 18',
+    datetime: '2022-10-18',
+    icon: HomeIcon,
+    iconBackground: 'b',
+  },
   {
     id: 2,
     content: 'Completed',
@@ -20,7 +30,7 @@ const timeline = [
     date: 'Dec 20',
     datetime: '2022-12-20',
     icon: AcademicCapIcon,
-    iconBackground: 'bg-gray-400',
+    iconBackground: 'bg-emerald-500',
   },
 ]
 </script>
