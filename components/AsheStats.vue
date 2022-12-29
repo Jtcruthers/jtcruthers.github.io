@@ -1,14 +1,10 @@
 <script setup lang="ts">
-const stats = [{
-  name: 'Height',
-  value: '11 in'
-}, {
-  name: 'Weight',
-  value: '25 lbs'
-}, {
-  name: 'Breed',
-  value: 'Poodle'
-}]
+const props = defineProps<{
+  stats: {
+    name: string
+    value: string
+  }[]
+}>()
 </script>
 
 <template>
@@ -18,7 +14,7 @@ const stats = [{
         <div class="relative">
           <div class="max-w-4xl">
             <dl class="rounded-lg bg-red-400 shadow-lg sm:grid sm:grid-cols-3">
-              <div v-for="(stat, index) in stats" class="flex flex-col border-b border-teal-300 p-6 text-center sm:border-0" :class="index === 0 ? 'sm:border-r' : index === (stats.length - 1) ? 'sm:border-l' : 'sm:border-l sm:border-r'">
+              <div v-for="(stat, index) in props.stats" class="flex flex-col border-b border-teal-300 p-6 text-center sm:border-0" :class="index === 0 ? 'sm:border-r' : index === (props.stats.length - 1) ? 'sm:border-l' : 'sm:border-l sm:border-r'">
                 <dt class="order-2 mt-2 text-lg font-medium leading-6 text-white">{{ stat.name }}</dt>
                 <dd class="order-1 text-5xl font-bold tracking-tight text-teal-300">{{ stat.value }}</dd>
               </div>
