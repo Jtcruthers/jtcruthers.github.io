@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
   timeline: {
-    id: number
     content: string
     target: string
     href: string
@@ -16,7 +15,7 @@ const props = defineProps<{
 <template>
   <div class="flow-root">
     <ul role="list" class="mb-8">
-      <li v-for="(event, eventIndex) in props.timeline" :key="event.id">
+      <li v-for="(event, eventIndex) in props.timeline" :key="event.target">
         <div class="relative pb-10">
           <span v-if="eventIndex !== props.timeline.length - 1" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
           <div class="relative flex space-x-3">
