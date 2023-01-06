@@ -58,6 +58,10 @@ const images = [
     src: "/images/all_of_us.jpeg",
     alt: 'All of us',
   },
+  {
+    src: "/images/ashe_graduation.jpeg",
+    alt: "Ashe's Graduation",
+  },
 ]
 </script>
 
