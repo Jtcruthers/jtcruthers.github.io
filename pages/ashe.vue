@@ -21,7 +21,7 @@ const timeline = [
     iconBackground: 'bg-blue-500',
   },
   {
-    content: 'Completed',
+    content: 'Learned',
     target: 'all basic tricks at class',
     href: '#',
     date: 'Dec 11',
@@ -38,14 +38,32 @@ const timeline = [
     icon: AcademicCapIcon,
     iconBackground: 'bg-emerald-500',
   },
+  {
+    content: 'Learned',
+    target: 'most intermediate tricks',
+    href: '#',
+    date: 'Feb 20',
+    datetime: '2023-02-20',
+    icon: BookOpenIcon,
+    iconBackground: 'bg-purple-500',
+  },
+  {
+    content: 'Graduated from',
+    target: 'Puppy Class 2',
+    href: '#',
+    date: 'Feb 28',
+    datetime: '2023-02-28',
+    icon: AcademicCapIcon,
+    iconBackground: 'bg-emerald-500',
+  },
 ]
 
 const stats = [{
   name: 'Height',
-  value: '11 in'
+  value: '21 in'
 }, {
   name: 'Weight',
-  value: '25 lbs'
+  value: '42 lbs'
 }, {
   name: 'Breed',
   value: 'Poodle'
