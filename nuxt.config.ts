@@ -8,5 +8,15 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
     '@nuxt/image-edge'
-  ]
+  ],
+  extends: ['@nuxt-themes/typography'],
+  content: {
+    highlight: {
+      preload: ['vue', 'ts', 'rust'],
+      theme: {
+        dark: 'github-dark',
+        default: 'github-light'
+      }
+    }
+  }
 })
