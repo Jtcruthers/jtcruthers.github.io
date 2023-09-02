@@ -1,0 +1,1 @@
+.fade-enter-active{transition:opacity .25s cubic-bezier(.55,.085,.68,.53)}.fade-leave-active{transition:opacity .25s cubic-bezier(.25,.46,.45,.94)}.fade-enter-from,.fade-leave-to{opacity:0}
