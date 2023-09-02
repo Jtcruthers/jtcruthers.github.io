@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+  baseURL: /jtcruthers.github.io/,
   srcDir: 'src',
   router: {
     base: '/jtcruthers.github.io/'
