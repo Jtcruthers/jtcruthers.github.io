@@ -2,16 +2,9 @@
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    baseURL: '/jtcruthers.github.io/'
-  },
-  baseURL: /jtcruthers.github.io/,
-  image: {
-    provider: 'static',
+    baseURL: process.env.NUXT_APP_BASE_URL || '/jtcruthers.github.io/'
   },
   srcDir: 'src',
-  router: {
-    base: '/jtcruthers.github.io/'
-  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
