@@ -1,1 +1,0 @@
-import{_ as o}from"./_plugin-vue_export-helper.c27b6911.js";import{o as s,c as t,C as _}from"./entry.63cd6275.js";const r={},c={class:"prose-em"};function n(e,a){return s(),t("em",c,[_(e.$slots,"default",{},void 0,!0)])}const m=o(r,[["render",n],["__scopeId","data-v-e69f91c9"]]);export{m as default};

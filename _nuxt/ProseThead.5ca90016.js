@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.c27b6911.js";import{o,c as s,E as _}from"./entry.08586ea1.js";const r={},a={class:"prose-thead"};function c(e,d){return o(),s("thead",a,[_(e.$slots,"default",{},void 0,!0)])}const l=t(r,[["render",c],["__scopeId","data-v-c3d96819"]]);export{l as default};
