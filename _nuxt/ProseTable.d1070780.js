@@ -1,1 +1,0 @@
-import{_ as s}from"./_plugin-vue_export-helper.c27b6911.js";import{o as t,c as a,a as o,E as r}from"./entry.be2066fe.js";const _={},n={class:"prose-table"};function c(e,l){return t(),a("div",n,[o("table",null,[r(e.$slots,"default",{},void 0,!0)])])}const u=s(_,[["render",c],["__scopeId","data-v-a1f55f6b"]]);export{u as default};
