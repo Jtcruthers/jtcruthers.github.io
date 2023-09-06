@@ -19,5 +19,8 @@ export default defineNuxtConfig({
         default: 'github-light'
       }
     }
+  },
+  nitro: {
+    preset: 'service-worker'
   }
 })
