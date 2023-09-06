@@ -1,1 +1,0 @@
-import{_ as o}from"./_plugin-vue_export-helper.c27b6911.js";import{o as t,c as s,C as _}from"./entry.82f0fb9b.js";const r={},c={class:"prose-blockquote"};function n(e,d){return t(),s("blockquote",c,[_(e.$slots,"default",{},void 0,!0)])}const u=o(r,[["render",n],["__scopeId","data-v-dfed2166"]]);export{u as default};

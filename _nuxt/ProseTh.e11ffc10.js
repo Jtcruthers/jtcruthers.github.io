@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.c27b6911.js";import{o,c as s,C as _}from"./entry.7aed0c20.js";const r={},n={class:"prose-th"};function c(e,a){return o(),s("th",n,[_(e.$slots,"default",{},void 0,!0)])}const l=t(r,[["render",c],["__scopeId","data-v-e8e88337"]]);export{l as default};

@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.c27b6911.js";import{o as s,c as t,C as r}from"./entry.82f0fb9b.js";const c={},n={class:"prose-tbody"};function a(o,_){return s(),t("tbody",n,[r(o.$slots,"default")])}const l=e(c,[["render",a]]);export{l as default};
