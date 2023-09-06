@@ -1,1 +1,0 @@
-import{_ as r}from"./_plugin-vue_export-helper.c27b6911.js";import{o as t,c as o,C as s}from"./entry.7aed0c20.js";const _={},n={class:"prose-tr"};function c(e,a){return t(),o("tr",n,[s(e.$slots,"default",{},void 0,!0)])}const l=r(_,[["render",c],["__scopeId","data-v-e7463fb4"]]);export{l as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper.c27b6911.js";import{o as _,c as r}from"./entry.5d8124f4.js";const o={},s={class:"prose-hr"};function c(t,a){return _(),r("hr",s)}const p=e(o,[["render",c],["__scopeId","data-v-5aa7c12d"]]);export{p as default};
