@@ -1,0 +1,27 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="hero-box">
+    {{- $names := site.Params.greetingNames }}
+    <h1>Hello <span id="greeting-name">{{ index $names 0 }}</span> :)</h1>
+  </div>
+</section>
+
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+<script>
+  (() => {
+    const names = {{ site.Params.greetingNames }};
+    const el = document.getElementById("greeting-name");
+    if (!el || names.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      el.classList.add("fade-out");
+      setTimeout(() => {
+        i = (i + 1) % names.length;
+        el.textContent = names[i];
+        el.classList.remove("fade-out");
+      }, 300);
+    }, 2000);
+  })();
+</script>
+{{ end }}

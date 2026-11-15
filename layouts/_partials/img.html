@@ -1,0 +1,14 @@
+{{- /*
+  Renders an image from assets/, resized to WebP at build time.
+  Params: src (path under assets/), alt, width (px), crop (bool, square crop), class.
+*/ -}}
+{{- $img := resources.Get .src }}
+{{- if not $img }}
+  {{- errorf "img partial: asset %q not found" .src }}
+{{- end }}
+{{- $w := .width | default 800 }}
+{{- $out := cond (.crop | default false)
+    ($img.Fill (printf "%dx%d center webp q80" $w $w))
+    ($img.Resize (printf "%dx webp q80" $w)) }}
+<img src="{{ $out.RelPermalink }}" width="{{ $out.Width }}" height="{{ $out.Height }}"
+     alt="{{ .alt }}" loading="lazy"{{ with .class }} class="{{ . }}"{{ end }}>

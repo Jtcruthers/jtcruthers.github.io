@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="ashe">
+  <header class="ashe-header">
+    {{ partial "img.html" (dict "src" .Params.profile "alt" .Title "width" 400 "crop" true "class" "avatar") }}
+    <div>
+      <h1>{{ .Title }}</h1>
+      <p class="meta">{{ .Description }}</p>
+    </div>
+  </header>
+
+  <hr>
+
+  <ol class="timeline">
+    {{- range .Params.timeline }}
+    {{- $date := time.AsTime .date }}
+    <li class="kind-{{ .kind }}">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card">
+        <p>{{ .verb }} <strong>{{ .what }}</strong></p>
+        <time datetime="{{ $date.Format "2006-01-02" }}">{{ $date.Format "Jan 2, 2006" }}</time>
+      </div>
+    </li>
+    {{- end }}
+  </ol>
+
+  <hr>
+
+  <dl class="stats">
+    {{- range .Params.stats }}
+    <div>
+      <dt>{{ .name }}</dt>
+      <dd>{{ .value }}</dd>
+    </div>
+    {{- end }}
+  </dl>
+
+  <hr>
+
+  <div class="photos">
+    {{- range .Params.photos }}
+    {{ partial "img.html" (dict "src" .src "alt" .alt "width" 800) }}
+    {{- end }}
+  </div>
+
+  {{ .Content }}
+</div>
+{{ end }}

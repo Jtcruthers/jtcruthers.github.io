@@ -1,0 +1,29 @@
+baseURL = "https://jtcruthers.github.io/"
+locale = "en-US"
+disableKinds = ["taxonomy", "term"]
+title = "Justin Carruthers"
+
+[params]
+  # Names cycled through in the home page greeting ("Hello Justin :)").
+  greetingNames = ["Justin", "Molly", "Ashe"]
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+  [[menus.main]]
+    name = "Blog"
+    pageRef = "/blog"
+    weight = 20
+  [[menus.main]]
+    name = "Ashe"
+    pageRef = "/ashe"
+    weight = 30
+
+[markup.goldmark.renderer]
+  # Allow raw HTML inside Markdown content.
+  unsafe = true
+
+[markup.highlight]
+  style = "dracula"

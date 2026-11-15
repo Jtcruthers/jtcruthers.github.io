@@ -1,34 +1,55 @@
-name: Deploy to Github Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time; don't cancel an in-progress production deploy.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  Deploy-to-Github-Pages:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          node-version: 18.16
-          cache: npm
+          fetch-depth: 0 # full history so .GitInfo / .Lastmod work if enabled later
 
-      - name: Install dependencies
-        uses: Borales/actions-yarn@v4.2.0
-        with:
-          cmd: install
+      # Installs the Hugo version pinned in mise.toml, so CI matches local exactly.
+      - name: Install Hugo
+        uses: jdx/mise-action@v2
 
-      - name: Generate static site
-        uses: Borales/actions-yarn@v4.2.0
-        with:
-          cmd: generate
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
-      - name: Deploy site
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Build site
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo build --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: .output/public
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
