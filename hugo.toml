@@ -20,6 +20,10 @@ title = "Justin Carruthers"
     name = "Ashe"
     pageRef = "/ashe"
     weight = 30
+  [[menus.main]]
+    name = "JuegoBoy"
+    pageRef = "/juegoboy"
+    weight = 40
 
 [markup.goldmark.renderer]
   # Allow raw HTML inside Markdown content.

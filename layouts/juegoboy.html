@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="juegoboy">
+  <h1>{{ .Title }}</h1>
+  <p class="meta">{{ .Description }}</p>
+
+
+  <canvas id="screen" aria-label="Game Boy screen"></canvas>
+
+  <div class="juegoboy-controls">
+    <label class="juegoboy-rom">
+      Load ROM
+      <input id="rom" type="file" accept=".gb,.gbc,.bin">
+    </label>
+    <button id="pause" type="button">Pause</button>
+  </div>
+
+  <p class="meta">Click the screen to focus. D-pad: WASD · A: ↑ · B: ← · Start: → · Select: ↓</p>
+
+  <div class="prose">{{ .Content }}</div>
+</div>
+
+<script type="module">
+  import { mount } from {{ "juegoboy/juegoboy.js" | relURL }};
+
+  const gb = await mount(document.getElementById("screen"), {
+    romInput: document.getElementById("rom"),
+  });
+
+  const pauseButton = document.getElementById("pause");
+  pauseButton.addEventListener("click", () => {
+    gb.paused ? gb.resume() : gb.pause();
+    pauseButton.textContent = gb.paused ? "Resume" : "Pause";
+  });
+</script>
+{{ end }}
