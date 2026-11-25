@@ -29,7 +29,13 @@
       <input id="rom" type="file">
     </label>
     <button id="pause" type="button">Pause</button>
+    <button id="download-save" type="button">Download save</button>
+    <button id="upload-save" type="button">Upload save</button>
+    <!-- No accept filter: iOS greys out unknown extensions like .sav -->
+    <input id="save" type="file" hidden>
   </div>
+
+  <p id="juegoboy-status" class="meta" role="status"></p>
 
   <p class="meta juegoboy-keys">Click the screen to focus. D-pad: WASD · A: ↑ · B: ← · Start: → · Select: ↓</p>
 
@@ -41,6 +47,20 @@
 
   const gb = await mount(document.getElementById("screen"), {
     romInput: document.getElementById("rom"),
+    saveInput: document.getElementById("save"),
+  });
+
+  const status = document.getElementById("juegoboy-status");
+  const saveInput = document.getElementById("save");
+  document.getElementById("download-save").addEventListener("click", () => {
+    status.textContent = gb.downloadSave() ? "" : "No save data. Load a game that supports saving.";
+  });
+  document.getElementById("upload-save").addEventListener("click", () => saveInput.click());
+  saveInput.addEventListener("saveimported", () => {
+    status.textContent = "Save loaded. Game restarted.";
+  });
+  saveInput.addEventListener("saveerror", (e) => {
+    status.textContent = `Couldn't load save: ${e.detail.message ?? e.detail}`;
   });
 
   // Pointer events (not click) so buttons can be held, and each finger is
