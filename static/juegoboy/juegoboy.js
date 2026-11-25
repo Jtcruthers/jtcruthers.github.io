@@ -1,5 +1,7 @@
 import init, { Emulator, Button } from "./pkg/gameboy_web.js";
 
+export { Button };
+
 const WIDTH = 160;
 const HEIGHT = 144;
 const MS_PER_FRAME = (70224 / 4194304) * 1000; // ≈ 59.73 fps
@@ -92,6 +94,16 @@ export async function mount(canvas, { romInput, keyTarget = canvas } = {}) {
       emulator = new Emulator(new Uint8Array(bytes));
       lastTime = performance.now();
       behind = 0;
+    },
+
+    /** Hold a button down (e.g. from an on-screen control). No-op before a ROM is loaded. */
+    press(button) {
+      emulator?.press_button(button);
+    },
+
+    /** Let go of a button pressed with `press`. */
+    release(button) {
+      emulator?.release_button(button);
     },
 
     get paused() {

@@ -103,3 +103,66 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 .juegoboy-controls button:hover, .juegoboy-rom:hover { border-color: var(--accent); }
 .juegoboy-rom input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .juegoboy-rom:focus-within { box-shadow: 0 0 0 3px var(--accent); }
+
+/* JuegoBoy touch controls: only on touch screens */
+.juegoboy-pad { display: none; }
+@media (pointer: coarse) {
+  .juegoboy-keys { display: none; }
+  /* Mashing buttons near text makes iOS select words; nothing here needs selecting */
+  .juegoboy > :not(.prose) { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .juegoboy-pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "dpad ab" "ss ss";
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    width: min(640px, 100%);
+    margin-top: .5rem;
+    touch-action: none;          /* no scroll / pinch / double-tap zoom while playing */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; /* no iOS long-press menu */
+    -webkit-tap-highlight-color: transparent;
+  }
+  .juegoboy-pad button {
+    font: inherit; font-weight: 600; color: var(--fg);
+    background: var(--card); border: 1px solid var(--border);
+    touch-action: none;
+  }
+  .juegoboy-pad button.held { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  .pad-dpad {
+    grid-area: dpad;
+    position: relative;
+    width: 9rem; aspect-ratio: 1;
+    border-radius: 50%;          /* round hit area, plus-shaped look */
+    touch-action: none;
+  }
+  .pad-dpad span {
+    position: absolute; width: 33.4%; height: 33.4%;
+    display: grid; place-items: center;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); font-size: .9rem;
+    pointer-events: none;        /* the whole pad is one target */
+  }
+  .pad-dpad .up    { left: 33.3%; top: 0;     border-radius: .4rem .4rem 0 0; }
+  .pad-dpad .down  { left: 33.3%; bottom: 0;  border-radius: 0 0 .4rem .4rem; }
+  .pad-dpad .left  { top: 33.3%;  left: 0;    border-radius: .4rem 0 0 .4rem; }
+  .pad-dpad .right { top: 33.3%;  right: 0;   border-radius: 0 .4rem .4rem 0; }
+  .pad-dpad::after {             /* center square */
+    content: ""; position: absolute; inset: 33.3%;
+    background: var(--card); pointer-events: none;
+  }
+  .pad-dpad[data-held~="up"]    .up,
+  .pad-dpad[data-held~="down"]  .down,
+  .pad-dpad[data-held~="left"]  .left,
+  .pad-dpad[data-held~="right"] .right { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  .pad-ab { grid-area: ab; display: flex; gap: .75rem; }
+  .pad-ab button { width: 4rem; height: 4rem; border-radius: 50%; font-size: 1.2rem; }
+  .pad-ab button[data-btn="B"] { margin-top: 1.75rem; }  /* classic diagonal layout */
+
+  .pad-ss { grid-area: ss; display: flex; gap: 1.5rem; }
+  .pad-ss button { padding: .3rem 1.1rem; border-radius: 999px; font-size: .8rem; }
+}

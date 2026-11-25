@@ -6,25 +6,127 @@
 
   <canvas id="screen" aria-label="Game Boy screen"></canvas>
 
+  <!-- On-screen controls, only shown on touch devices (see main.css) -->
+  <div class="juegoboy-pad" aria-hidden="true">
+    <div class="pad-dpad" id="dpad">
+      <span class="up">▲</span><span class="left">◀</span>
+      <span class="right">▶</span><span class="down">▼</span>
+    </div>
+    <div class="pad-ab">
+      <button type="button" data-btn="B" tabindex="-1">B</button>
+      <button type="button" data-btn="A" tabindex="-1">A</button>
+    </div>
+    <div class="pad-ss">
+      <button type="button" data-btn="Select" tabindex="-1">Select</button>
+      <button type="button" data-btn="Start" tabindex="-1">Start</button>
+    </div>
+  </div>
+
   <div class="juegoboy-controls">
     <label class="juegoboy-rom">
       Load ROM
-      <input id="rom" type="file" accept=".gb,.gbc,.bin">
+      <!-- No `accept`: iOS can't map .gb/.gbc to a known file type and greys every ROM out -->
+      <input id="rom" type="file">
     </label>
     <button id="pause" type="button">Pause</button>
   </div>
 
-  <p class="meta">Click the screen to focus. D-pad: WASD · A: ↑ · B: ← · Start: → · Select: ↓</p>
+  <p class="meta juegoboy-keys">Click the screen to focus. D-pad: WASD · A: ↑ · B: ← · Start: → · Select: ↓</p>
 
   <div class="prose">{{ .Content }}</div>
 </div>
 
 <script type="module">
-  import { mount } from {{ "juegoboy/juegoboy.js" | relURL }};
+  import { mount, Button } from {{ "juegoboy/juegoboy.js" | relURL }};
 
   const gb = await mount(document.getElementById("screen"), {
     romInput: document.getElementById("rom"),
   });
+
+  // Pointer events (not click) so buttons can be held, and each finger is
+  // tracked separately so the d-pad and A/B work at the same time.
+  // Pointer capture keeps the release on the element that saw the press.
+  // iOS doesn't always deliver every end event, so each control releases on
+  // whichever of these arrives first.
+  const END_EVENTS = ["pointerup", "pointercancel", "lostpointercapture"];
+  const pad = document.querySelector(".juegoboy-pad");
+
+  // Stop iOS treating fast taps as double-tap zoom / text selection / callouts.
+  // (preventDefault on pointerdown doesn't stop these; it has to be touchstart.)
+  pad.addEventListener("touchstart", (e) => e.preventDefault(), { passive: false });
+
+  // A, B, Start, Select: hold to press.
+  const buttonResets = [];
+  for (const el of document.querySelectorAll(".juegoboy-pad [data-btn]")) {
+    const button = Button[el.dataset.btn];
+    const up = () => {
+      el.classList.remove("held");
+      gb.release(button);
+    };
+    el.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      try { el.setPointerCapture(e.pointerId); } catch {}
+      el.classList.add("held");
+      gb.press(button);
+    });
+    for (const type of END_EVENTS) el.addEventListener(type, up);
+    buttonResets.push(up);
+  }
+
+  // D-pad: one element. The direction comes from where the finger is relative
+  // to the center, so you can roll your thumb between directions and hit diagonals.
+  const dpad = document.getElementById("dpad");
+  const DIRS = { up: Button.Up, down: Button.Down, left: Button.Left, right: Button.Right };
+  const held = new Set();
+  let dpadPointer = null;
+
+  function setDirections(next) {
+    for (const dir of held) if (!next.has(dir)) { gb.release(DIRS[dir]); held.delete(dir); }
+    for (const dir of next) if (!held.has(dir)) { gb.press(DIRS[dir]); held.add(dir); }
+    dpad.dataset.held = [...held].join(" ");
+  }
+
+  function aim(e) {
+    const r = dpad.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    const ax = Math.abs(dx), ay = Math.abs(dy);
+    const dead = r.width * 0.12; // small dead zone in the middle
+    const lean = 0.414;          // tan(22.5°): 8 equal slices, so diagonals are as easy as straights
+    const next = new Set();
+    if (ax > dead && ax > ay * lean) next.add(dx < 0 ? "left" : "right");
+    if (ay > dead && ay > ax * lean) next.add(dy < 0 ? "up" : "down");
+    setDirections(next);
+  }
+
+  // The newest finger on the d-pad always takes over. (Ignoring new touches
+  // while one is "active" meant a lost end event locked the d-pad forever.)
+  dpad.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    dpadPointer = e.pointerId;
+    try { dpad.setPointerCapture(e.pointerId); } catch {}
+    aim(e);
+  });
+  dpad.addEventListener("pointermove", (e) => {
+    if (e.pointerId === dpadPointer) aim(e);
+  });
+  for (const type of END_EVENTS) {
+    dpad.addEventListener(type, (e) => {
+      if (e.pointerId !== dpadPointer) return;
+      dpadPointer = null;
+      setDirections(new Set());
+    });
+  }
+
+  // Leaving the page (app switch, notification, lock) can swallow end events
+  // entirely, so let go of everything.
+  function releaseTouch() {
+    dpadPointer = null;
+    setDirections(new Set());
+    for (const up of buttonResets) up();
+  }
+  window.addEventListener("blur", releaseTouch);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) releaseTouch(); });
 
   const pauseButton = document.getElementById("pause");
   pauseButton.addEventListener("click", () => {
